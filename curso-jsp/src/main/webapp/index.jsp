@@ -15,23 +15,24 @@ out.print("seu sucesso garantido");
 %>
 
 <form action="ServletLogin" method="post">
-<table>
-<tr>
-	<td>Login</td>
-	<td><input name="login" type="text"></td>
-</tr>
-
-<tr>
-	<td><label>Senha</label></td>
-	<td><input name="senha" type="password"></td>
-</tr>
-
-<tr>
-<td></td>
-<td><input type="submit" value="Enviar"></td>
-</tr>
-
-</table>
+<input type="hidden" value="<%= request.getParameter("url") %>" name="url" />
+	<table>
+		<tr>
+			<td>Login</td>
+			<td><input name="login" type="text"></td>
+		</tr>
+		
+		<tr>
+			<td><label>Senha</label></td>
+			<td><input name="senha" type="password"></td>
+		</tr>
+		
+		<tr>
+			<td></td>
+			<td><input type="submit" value="Enviar"></td>
+		</tr>
+	
+	</table>
 
 </form>
 <h4>${msg}</h4>
