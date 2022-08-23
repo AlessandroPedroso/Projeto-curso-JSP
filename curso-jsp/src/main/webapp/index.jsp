@@ -75,9 +75,9 @@ border-color: #ffeeba
 		<div class="form-group">
 			<input type="submit" value="Acessar" class="btn btn-primary">
 			</div>
-
-</form>
 <h5 class="alert alert-warning" role="alert">${msg}</h5>
+</form>
+
 </div>
 
 
