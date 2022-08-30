@@ -45,7 +45,7 @@ border-color: #ffeeba
 
 <div class=center>
 <h5>Bem vindo ao curso de JSP</h5>
-<form action="ServletLogin" method="post" class="needs-validation" novalidate>
+<form action="<%=request.getContextPath() %>/ServletLogin" method="post" class="needs-validation" novalidate>
 <input type="hidden" value="<%= request.getParameter("url") %>" name="url" />
 
 
