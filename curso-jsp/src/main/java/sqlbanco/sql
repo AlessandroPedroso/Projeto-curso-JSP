@@ -11,8 +11,13 @@ CREATE TABLE public.model_login
 (
   login character varying(200),
   senha character varying(200),
+  id integer NOT NULL DEFAULT nextval('model_login_id_seq'::regclass),
+  nome character varying(255) NOT NULL,
+  email character varying(255) NOT NULL,
+  CONSTRAINT model_login_pkey PRIMARY KEY (id),
   CONSTRAINT login_unique UNIQUE (login)
 )
+
 WITH (
   OIDS=FALSE
 );

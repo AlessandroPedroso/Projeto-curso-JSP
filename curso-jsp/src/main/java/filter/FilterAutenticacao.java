@@ -29,6 +29,7 @@ public class FilterAutenticacao extends HttpFilter implements Filter{
 	
 	private static Connection connection;
 
+
 	public FilterAutenticacao() {
         super();
     }
