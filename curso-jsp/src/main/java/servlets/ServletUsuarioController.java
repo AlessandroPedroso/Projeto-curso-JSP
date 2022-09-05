@@ -36,10 +36,23 @@ public class ServletUsuarioController extends HttpServlet {
 				daoUsuarioRepository.deletarUser(idUser);
 				
 				request.setAttribute("msg", "Excluído com sucesso!");
+				
+				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 		
-			}
+			}else if(acao !=null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarajax")) {
+					
+					String idUser = request.getParameter("id");
+					
+					daoUsuarioRepository.deletarUser(idUser);
+					
+					response.getWriter().write("Excluído com sucesso!");
 			
-			request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				}else {
+					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				}
+			
+			
+			
 			
 		}catch (Exception e) {
 			
@@ -90,11 +103,12 @@ public class ServletUsuarioController extends HttpServlet {
 						
 						
 						modelLogin = daoUsuarioRepository.gravarUser(modelLogin);
+						request.setAttribute("modelLogin", modelLogin);
 						
 					}
 					
 					request.setAttribute("msg", msg);
-					request.setAttribute("modelLogin", modelLogin);
+					
 					
 				    RequestDispatcher redireciona = request.getRequestDispatcher("principal/usuario.jsp");
 				    redireciona.forward(request, response);

@@ -41,7 +41,7 @@
 												</div>
 												<div class="card-block">
 													<h4 class="sub-title">Formulário de cadastro</h4>
-														<form class="form-material" action="<%=request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser">
+														<form class="form-material" action="<%=request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser" autocomplete="off">
                                                             <input type="hidden" name="acao" id="acao" value="">
                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}">
@@ -73,7 +73,7 @@
 
 															<button type="button" class="btn btn-primary waves-effect waves-light" onclick="limparForm();">Novo</button>
 															<button class="btn btn-success waves-effect waves-light">Salvar</button>
-												            <button type="button" class="btn btn-info waves-effect waves-light" onclick="CriarDelete();">Excluir</button>
+												            <button type="button" class="btn btn-info waves-effect waves-light" onclick="criaDeleteComAjax();">Excluir</button>
 												            <!-- Button trigger modal -->
 															<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
                                                         </form>
@@ -109,7 +109,24 @@
         </button>
       </div>
       <div class="modal-body">
-        
+        <div class="input-group mb-3">
+		  <input type="text" class="form-control" placeholder="Nome" aria-label="nome" id="nomeBusca" aria-describedby="basic-addon2">
+		  <div class="input-group-append">
+		    <button class="btn btn-success" type="button" onclick="buscarUsuario();">Button</button>
+		  </div>
+		</div>
+		<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Ver</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+  </tbody>
+</table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -120,6 +137,42 @@
 </div>
   
   <script type="text/javascript">
+  
+  function buscarUsuario(){
+	   var nome = document.getElementById("nomeBusca").value;
+	   
+	   if(nome !=null && nome !='' && nome.trim() !='') { /*Validando que tem que ter valor para buscar no banco de dados*/
+		   alert(nome);
+	   }
+	  
+  }
+  
+  function criaDeleteComAjax(){
+	  
+	  if(confirm('Deseja realmente excluir os dados?')){
+		  
+		  var urlAction = document.getElementById('formUser').action;
+		  var idUser = document.getElementById("id").value;
+		  var msg = document.querySelector("#msg");
+		  
+		  $.ajax({
+			  
+			  method:"get", //manda ação para a servlet
+			  url: urlAction, //pega ação do form para saber qual servlet mandar
+			  data: "id=" + idUser + "&acao=deletarajax",
+			  success: function (response){
+				  
+				  limparForm();
+				  msg.textContent = response;
+				  //alert(response); //pega o response write da servlet
+			  }
+			  
+		  }).fail(function(xhr, status, errorThrown){
+			 alert('Erro ao deletar usuário por id: ' + xhr.responseText); 
+		  });
+	  }
+	  
+  }
   
   function CriarDelete(){
 	  
