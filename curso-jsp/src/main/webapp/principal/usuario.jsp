@@ -139,10 +139,26 @@
   <script type="text/javascript">
   
   function buscarUsuario(){
-	   var nome = document.getElementById("nomeBusca").value;
+	   var nome = document.getElementById('nomeBusca').value;
 	   
 	   if(nome !=null && nome !='' && nome.trim() !='') { /*Validando que tem que ter valor para buscar no banco de dados*/
-		   alert(nome);
+			  var urlAction = document.getElementById('formUser').action;
+			  var msg = document.querySelector("#msg");
+			  
+			  $.ajax({
+				  
+				  method:"get", //manda ação para a servlet
+				  url: urlAction, //pega ação do form para saber qual servlet mandar
+				  data: "nomeBusca=" + nome + "&acao=buscarUserAjax",
+				  success: function (response){
+					  
+					  //msg.textContent = response;
+					  alert(response); //pega o response write da servlet
+				  }
+				  
+			  }).fail(function(xhr, status, errorThrown){
+				 alert('Erro ao buscar usuário por nome: ' + xhr.responseText); 
+			  });
 	   }
 	  
   }

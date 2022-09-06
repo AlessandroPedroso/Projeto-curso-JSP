@@ -65,4 +65,10 @@ public class ModelLogin implements Serializable {
 	public String getLogin() {
 		return login;
 	}
+
+	@Override
+	public String toString() {
+		return "ModelLogin [id=" + id + ", nome=" + nome + ", email=" + email + ", login=" + login + ", senha=" + senha
+				+ "]";
+	}
 }
