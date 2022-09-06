@@ -115,7 +115,8 @@
 		    <button class="btn btn-success" type="button" onclick="buscarUsuario();">Button</button>
 		  </div>
 		</div>
-		<table class="table">
+		<div style="height: 300px; overflow: scroll;">
+		<table class="table" id="tabelaResultados">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -127,6 +128,9 @@
     
   </tbody>
 </table>
+
+</div>
+<span id="totalResultados"></span>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
@@ -139,9 +143,11 @@
   <script type="text/javascript">
   
   function buscarUsuario(){
+	  
 	   var nome = document.getElementById('nomeBusca').value;
 	   
 	   if(nome !=null && nome !='' && nome.trim() !='') { /*Validando que tem que ter valor para buscar no banco de dados*/
+		   
 			  var urlAction = document.getElementById('formUser').action;
 			  var msg = document.querySelector("#msg");
 			  
@@ -152,8 +158,18 @@
 				  data: "nomeBusca=" + nome + "&acao=buscarUserAjax",
 				  success: function (response){
 					  
+					  var json = JSON.parse(response);
+					  
+					  $('#tabelaResultados > tbody > tr').remove(); // remove todas as linhas
+					  
+					  for(var p = 0; p < json.length; p++){
+						  $('#tabelaResultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td>'+json[p].nome+'</td> <td><button type="button" class="btn btn-info">Ver</button></td></tr>');
+					  }
+					  
+					  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
+					  
 					  //msg.textContent = response;
-					  alert(response); //pega o response write da servlet
+					  //alert(json); //pega o response write da servlet
 				  }
 				  
 			  }).fail(function(xhr, status, errorThrown){
