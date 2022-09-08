@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +44,7 @@
 													<h4 class="sub-title">Formulário de cadastro</h4>
 														<form class="form-material" action="<%=request.getContextPath() %>/ServletUsuarioController" method="post" id="formUser" autocomplete="off">
                                                             <input type="hidden" name="acao" id="acao" value="">
+                                                            
                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="id" id="id" class="form-control" readonly="readonly" value="${modelLogin.id}">
                                                                 <span class="form-bar"></span>
@@ -80,7 +82,29 @@
 														</div>
 														</div>
 														<span id="msg">${msg}</span>
-														</div>
+														
+												<div style="height: 300px; overflow: scroll;">
+													<table class="table" id="tabelaResultadosview">
+														<thead>
+															<tr>
+																<th scope="col">ID</th>
+																<th scope="col">Nome</th>
+																<th scope="col">Ver</th>
+															</tr>
+														</thead>
+														<tbody>
+															<c:forEach items='${modelLogins}' var="ml">
+																<tr>
+																<td><c:out value="${ml.id}"></c:out></td>
+																<td><c:out value="${ml.nome}"></c:out></td>
+																<td><a class="btn btn-success" href="<%= request.getContextPath() %>/ServletUsuarioController?acao=buscarEditar&id=${ml.id}">Ver</a></td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+
+												</div>
+											</div>
 														
 														<!-- Page-body end -->
 												</div>
@@ -142,6 +166,13 @@
   
   <script type="text/javascript">
   
+  function verEditar(id){
+	  
+	  var urlAction = document.getElementById('formUser').action;
+	  //alert(urlAction);
+	  window.location.href = urlAction + '?acao=buscarEditar&id=' + id;
+  }
+  
   function buscarUsuario(){
 	  
 	   var nome = document.getElementById('nomeBusca').value;
@@ -163,7 +194,7 @@
 					  $('#tabelaResultados > tbody > tr').remove(); // remove todas as linhas
 					  
 					  for(var p = 0; p < json.length; p++){
-						  $('#tabelaResultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td>'+json[p].nome+'</td> <td><button type="button" class="btn btn-info">Ver</button></td></tr>');
+						  $('#tabelaResultados > tbody').append('<tr> <td>'+json[p].id+'</td> <td>'+json[p].nome+'</td> <td><button type="button" onclick="verEditar('+json[p].id+')" class="btn btn-info">Ver</button></td></tr>');
 					  }
 					  
 					  document.getElementById('totalResultados').textContent = 'Resultados: ' + json.length;
