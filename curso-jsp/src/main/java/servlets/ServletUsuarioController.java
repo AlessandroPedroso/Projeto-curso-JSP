@@ -150,7 +150,6 @@ public class ServletUsuarioController extends ServletGenericUtil {
 						
 						modelLogin = daoUsuarioRepository.gravarUser(modelLogin,super.getUserLogado(request));
 						
-						
 					}
 					
 					List<ModelLogin> listModelLogin = daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
