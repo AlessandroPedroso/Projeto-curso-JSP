@@ -38,6 +38,21 @@ public class DAOUsuarioRepository {
 			insert.execute();
 			connection.commit();
 			
+			if(objeto.getFotouser() !=null && !objeto.getFotouser().isEmpty()) {
+				
+				sql = "update model_login set fotouser=?, extensaofotouser=? where login = ?";
+				
+				insert.setString(1, objeto.getFotouser());
+				insert.setString(2, objeto.getExtensaofotouser());
+				insert.setString(3, objeto.getLogin());
+				
+				insert.execute();
+				connection.commit();
+				
+				
+			}
+			
+			
 		}else {
 			
 			String sql = "UPDATE model_login SET login=?, senha=?, nome=?, email=?, perfil=?, sexo=? WHERE id = " + objeto.getId() +"";
@@ -50,6 +65,19 @@ public class DAOUsuarioRepository {
 			preparaSql.setString(6, objeto.getSexo());
 			preparaSql.executeUpdate();
 			connection.commit();
+			
+			
+			if(objeto.getFotouser() !=null && !objeto.getFotouser().isEmpty()) {
+				
+				sql = "update model_login set fotouser=?, extensaofotouser=? where id = ?";
+				PreparedStatement statementArquivo = connection.prepareStatement(sql);
+				statementArquivo.setString(1, objeto.getFotouser());
+				statementArquivo.setString(2, objeto.getExtensaofotouser());
+				statementArquivo.setLong(3, objeto.getId());
+				
+				statementArquivo.execute();
+				connection.commit();
+			}
 			
 		}
 			return this.consultaUsuario(objeto.getLogin(), userLogado);

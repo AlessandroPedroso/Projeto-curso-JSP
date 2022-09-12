@@ -145,7 +145,10 @@ public class ServletUsuarioController extends ServletGenericUtil {
 						
 						Part part = request.getPart("filefoto"); /*pega foto da tela*/
 						byte[] foto = IOUtils.toByteArray(part.getInputStream()); /*converte imagem para byte*/
-						String imagemBase64 = new Base64().encodeBase64String(foto);
+						String imagemBase64 = "data:image/" + part.getContentType().split("\\/")[1] + ";base64," + new Base64().encodeBase64String(foto);
+						
+						modelLogin.setFotouser(imagemBase64);
+						modelLogin.setExtensaofotouser(part.getContentType().split("\\/")[1]);
 						
 					}
 					
