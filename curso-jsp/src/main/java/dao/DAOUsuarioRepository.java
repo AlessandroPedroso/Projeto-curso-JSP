@@ -25,7 +25,7 @@ public class DAOUsuarioRepository {
 		if(objeto.isNovo()) {/*Grava um novo*/
 			
 		
-			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id) VALUES (?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil) VALUES (?, ?, ?, ?, ?, ?)";
 	
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, objeto.getLogin());
@@ -33,17 +33,19 @@ public class DAOUsuarioRepository {
 			insert.setString(3, objeto.getNome());
 			insert.setString(4, objeto.getEmail());
 			insert.setLong(5, userLogado);
+			insert.setString(6, objeto.getPerfil());
 			insert.execute();
 			connection.commit();
 			
 		}else {
 			
-			String sql = "UPDATE model_login SET login=?, senha=?, nome=?, email=? WHERE id = " + objeto.getId() +"";
+			String sql = "UPDATE model_login SET login=?, senha=?, nome=?, email=?, perfil=? WHERE id = " + objeto.getId() +"";
 			PreparedStatement preparaSql = connection.prepareStatement(sql);
 			preparaSql.setString(1, objeto.getLogin());
 			preparaSql.setString(2, objeto.getSenha());
 			preparaSql.setString(3, objeto.getNome());
 			preparaSql.setString(4, objeto.getEmail());
+			preparaSql.setString(5, objeto.getPerfil());
 			preparaSql.executeUpdate();
 			connection.commit();
 			
@@ -142,6 +144,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setSenha(resultSet.getString("senha"));
 			modelLogin.setNome(resultSet.getString("nome"));
 			modelLogin.setUseradmin(resultSet.getBoolean("useradmin"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
 		}
 		
 		return modelLogin;

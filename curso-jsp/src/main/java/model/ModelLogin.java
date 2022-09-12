@@ -12,6 +12,15 @@ public class ModelLogin implements Serializable {
 	private String login;
 	private String senha;
 	private Boolean useradmin;
+	private String perfil;
+	
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+	
+	public String getPerfil() {
+		return perfil;
+	}
 	
 	public void setUseradmin(Boolean useradmin) {
 		this.useradmin = useradmin;

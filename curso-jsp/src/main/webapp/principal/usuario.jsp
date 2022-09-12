@@ -50,24 +50,34 @@
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">ID:</label>
                                                             </div>
-                                                              <div class="form-group form-default">
+                                                              <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="nome" id="nome" class="form-control" required="required" value="${modelLogin.nome}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Nome:</label>
                                                             </div>
-                                                            <div class="form-group form-default">
+                                                            <div class="form-group form-default form-static-label">
                                                                 <input type="email" name="email" id="email" class="form-control" required="required" autocomplete="off" value="${modelLogin.email}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Email:</label>
                                                             </div>
-                                                            
-                                                             <div class="form-group form-default">
+                                                            <div class="form-group form-default form-static-label">
+	                                                            <select class="form-control" aria-label="Default select example" name="perfil" id="perfil">
+																  <option disabled="disabled">[Selecione o Perfil]</option>
+										
+																  <option value="ADMIN">Admin</option>
+																  <option value="SECRETARIA">Secretária</option>
+																  <option value="AUXILIAR">Auxiliar</option>
+																</select>
+																 <span class="form-bar"></span>
+                                                                <label class="float-label">Perfil:</label>
+                                                            </div>
+                                                             <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${modelLogin.login}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Login</label>
                                                             </div>
                                                             
-                                                            <div class="form-group form-default">
+                                                            <div class="form-group form-default form-static-label">
                                                                 <input type="password" name="senha" id="senha" class="form-control" required="required" autocomplete="off" value="${modelLogin.senha}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Senha</label>
