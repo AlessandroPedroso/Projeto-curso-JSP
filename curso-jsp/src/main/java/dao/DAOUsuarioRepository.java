@@ -69,6 +69,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setId(resultSet.getLong("id"));
 			modelLogin.setLogin(resultSet.getString("login"));
 			modelLogin.setNome(resultSet.getString("nome"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
 			//modelLogin.setSenha(resultSet.getString("senha"));
 			
 			retorno.add(modelLogin);
@@ -95,6 +96,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setId(resultSet.getLong("id"));
 			modelLogin.setLogin(resultSet.getString("login"));
 			modelLogin.setNome(resultSet.getString("nome"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
 			//modelLogin.setSenha(resultSet.getString("senha"));
 			
 			retorno.add(modelLogin);
@@ -168,6 +170,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setSenha(resultSet.getString("senha"));
 			modelLogin.setNome(resultSet.getString("nome"));
 			modelLogin.setUseradmin(resultSet.getBoolean("useradmin"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
 		}
 		
 		return modelLogin;
@@ -192,6 +195,7 @@ public class DAOUsuarioRepository {
 					modelLogin.setLogin(resultSet.getString("login"));
 					modelLogin.setSenha(resultSet.getString("senha"));
 					modelLogin.setNome(resultSet.getString("nome"));
+					modelLogin.setPerfil(resultSet.getString("perfil"));
 				}
 				
 				return modelLogin;
