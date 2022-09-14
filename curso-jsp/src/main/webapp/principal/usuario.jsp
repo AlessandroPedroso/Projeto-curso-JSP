@@ -1,5 +1,5 @@
 <%@page import="model.ModelLogin"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="ISO-8859-1"%>
     
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
@@ -116,12 +116,54 @@
 																 <span class="form-bar"></span>
                                                                 <label class="float-label">Perfil:</label>
                                                             </div>
+                                                            
+                                                                 <div class="form-group form-default form-static-label">
+                                                                <input onblur="pesquisaCep();" type="text" name="cep" id="cep" maxlength="9" class="form-control" required="required" autocomplete="off" value="${modelLogin.cep}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Cep</label>
+                                                              
+                                                            </div>
+                                                            
+                                                                 <div class="form-group form-default form-static-label">
+                                                                <input type="text" name="logradouro" id="logradouro" class="form-control" required="required" autocomplete="off" value="${modelLogin.logradouro}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Logradouro</label>
+                                                              
+                                                            </div>
+                                                            
+                                                                <div class="form-group form-default form-static-label">
+                                                                <input type="text" name="bairro" id="bairro" class="form-control" required="required" autocomplete="off" value="${modelLogin.bairro}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Bairro</label>
+                                                              
+                                                            </div>
+                                                            
+                                                                 <div class="form-group form-default form-static-label">
+                                                                <input type="text" name="localidade" id="localidade" class="form-control" required="required" autocomplete="off" value="${modelLogin.localidade}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Localidade</label>
+                                                              
+                                                            </div>
+                                                            
+                                                                <div class="form-group form-default form-static-label">
+                                                                <input type="text" name="uf" id="uf" class="form-control" required="required" autocomplete="off" value="${modelLogin.uf}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Estado</label>
+                                                              
+                                                            </div>
+                                                            
+                                                                 <div class="form-group form-default form-static-label">
+                                                                <input type="text" name="numero" id="numero" class="form-control" required="required" autocomplete="off" value="${modelLogin.numero}">
+                                                                <span class="form-bar"></span>
+                                                                <label class="float-label">Numero</label>
+                                                              
+                                                            </div>
+                                                            
                                                              <div class="form-group form-default form-static-label">
                                                                 <input type="text" name="login" id="login" class="form-control" required="required" autocomplete="off" value="${modelLogin.login}">
                                                                 <span class="form-bar"></span>
                                                                 <label class="float-label">Login</label>
-                                                                
-                                                                
+                                                              
                                                             </div>
                                                             
                                                             <div class="form-group form-default form-static-label">
@@ -253,8 +295,36 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script>
+    $(document).ready(function () { 
+        var $cep = $("#cep");
+        $cep.mask('00000-000', {reverse: true});
+    });
+</script>
   
   <script type="text/javascript">
+  
+  function pesquisaCep(){
+	  
+	  var cep = $("#cep").val();
+	  
+	  $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados){
+		  
+		  if (!("erro" in dados)) {
+			  
+              //Atualiza os campos com os valores da consulta.
+              $("#cep").val(dados.cep);
+              $("#logradouro").val(dados.logradouro);
+              $("#bairro").val(dados.bairro);
+              $("#localidade").val(dados.localidade);
+              $("#uf").val(dados.uf);
+              
+		  }
+	  });
+	  
+  }
   
   function visualizarImg(fotoembase64,filefoto){
 	  

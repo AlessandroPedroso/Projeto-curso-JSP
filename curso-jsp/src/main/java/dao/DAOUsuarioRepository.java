@@ -25,7 +25,7 @@ public class DAOUsuarioRepository {
 		if(objeto.isNovo()) {/*Grava um novo*/
 			
 		
-			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, objeto.getLogin());
@@ -35,6 +35,13 @@ public class DAOUsuarioRepository {
 			insert.setLong(5, userLogado);
 			insert.setString(6, objeto.getPerfil());
 			insert.setString(7, objeto.getSexo());
+			
+			insert.setString(8, objeto.getCep());
+			insert.setString(9, objeto.getLogradouro());	
+			insert.setString(10, objeto.getBairro());	
+			insert.setString(11, objeto.getLocalidade());	
+			insert.setString(12, objeto.getUf());
+			insert.setString(13, objeto.getNumero());
 			insert.execute();
 			connection.commit();
 			
@@ -48,14 +55,12 @@ public class DAOUsuarioRepository {
 				
 				insert.execute();
 				connection.commit();
-				
-				
 			}
 			
 			
 		}else {
 			
-			String sql = "UPDATE model_login SET login=?, senha=?, nome=?, email=?, perfil=?, sexo=? WHERE id = " + objeto.getId() +"";
+			String sql = "UPDATE model_login SET login=?, senha=?, nome=?, email=?, perfil=?, sexo=?, cep=?, logradouro=?, bairro=?, localidade=?, uf=?, numero=? WHERE id = " + objeto.getId() +"";
 			PreparedStatement preparaSql = connection.prepareStatement(sql);
 			preparaSql.setString(1, objeto.getLogin());
 			preparaSql.setString(2, objeto.getSenha());
@@ -63,6 +68,13 @@ public class DAOUsuarioRepository {
 			preparaSql.setString(4, objeto.getEmail());
 			preparaSql.setString(5, objeto.getPerfil());
 			preparaSql.setString(6, objeto.getSexo());
+			
+			preparaSql.setString(7, objeto.getCep());
+			preparaSql.setString(8, objeto.getLogradouro());	
+			preparaSql.setString(9, objeto.getBairro());	
+			preparaSql.setString(10, objeto.getLocalidade());	
+			preparaSql.setString(11, objeto.getUf());
+			preparaSql.setString(12, objeto.getNumero());
 			preparaSql.executeUpdate();
 			connection.commit();
 			
@@ -158,6 +170,13 @@ public class DAOUsuarioRepository {
 			modelLogin.setPerfil(resultSet.getString("perfil"));
 			modelLogin.setSexo(resultSet.getString("sexo"));
 			modelLogin.setFotouser(resultSet.getString("fotouser"));
+			
+			modelLogin.setCep(resultSet.getString("cep"));
+			modelLogin.setLogradouro(resultSet.getString("logradouro"));
+			modelLogin.setBairro(resultSet.getString("bairro"));
+			modelLogin.setLocalidade(resultSet.getString("localidade"));
+			modelLogin.setUf(resultSet.getString("uf"));
+			modelLogin.setNumero(resultSet.getString("numero"));
 		}
 		
 		return modelLogin;
@@ -184,6 +203,13 @@ public class DAOUsuarioRepository {
 			modelLogin.setPerfil(resultSet.getString("perfil"));
 			modelLogin.setSexo(resultSet.getString("sexo"));
 			modelLogin.setFotouser(resultSet.getString("fotouser"));
+			
+			modelLogin.setCep(resultSet.getString("cep"));
+			modelLogin.setLogradouro(resultSet.getString("logradouro"));
+			modelLogin.setBairro(resultSet.getString("bairro"));
+			modelLogin.setLocalidade(resultSet.getString("localidade"));
+			modelLogin.setUf(resultSet.getString("uf"));
+			modelLogin.setNumero(resultSet.getString("numero"));
 		}
 		
 		return modelLogin;
@@ -210,6 +236,13 @@ public class DAOUsuarioRepository {
 			modelLogin.setPerfil(resultSet.getString("perfil"));
 			modelLogin.setSexo(resultSet.getString("sexo"));
 			modelLogin.setFotouser(resultSet.getString("fotouser"));
+			
+			modelLogin.setCep(resultSet.getString("cep"));
+			modelLogin.setLogradouro(resultSet.getString("logradouro"));
+			modelLogin.setBairro(resultSet.getString("bairro"));
+			modelLogin.setLocalidade(resultSet.getString("localidade"));
+			modelLogin.setUf(resultSet.getString("uf"));
+			modelLogin.setNumero(resultSet.getString("numero"));
 		}
 		
 		return modelLogin;
@@ -238,6 +271,13 @@ public class DAOUsuarioRepository {
 					modelLogin.setSexo(resultSet.getString("sexo"));
 					modelLogin.setFotouser(resultSet.getString("fotouser"));
 					modelLogin.setExtensaofotouser(resultSet.getString("extensaofotouser"));
+					
+					modelLogin.setCep(resultSet.getString("cep"));
+					modelLogin.setLogradouro(resultSet.getString("logradouro"));
+					modelLogin.setBairro(resultSet.getString("bairro"));
+					modelLogin.setLocalidade(resultSet.getString("localidade"));
+					modelLogin.setUf(resultSet.getString("uf"));
+					modelLogin.setNumero(resultSet.getString("numero"));
 				}
 				
 				return modelLogin;
