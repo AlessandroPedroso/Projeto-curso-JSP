@@ -48,7 +48,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("modelLogins", listModelLogin);
 				
 				request.setAttribute("msg", "Excluído com sucesso!");
-				
+				request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 		
 			}else if(acao !=null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarajax")) {
@@ -83,6 +83,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					
 					request.setAttribute("msg", "Usuário em edição");
 					request.setAttribute("modelLogin", modelLogin);
+					request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
 				    request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 					
 				}else if(acao !=null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {// carrega na página usando JSTL
@@ -91,7 +92,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					
 					request.setAttribute("msg", "Usuários carregados");
 					request.setAttribute("modelLogins", listModelLogin);
-					
+					request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
 				    request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 					
 					
@@ -110,9 +111,11 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					
 				}
 				else {
-					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 					List<ModelLogin> listModelLogin = daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
 					request.setAttribute("modelLogins", listModelLogin);
+					request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
+					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+			
 				}
 			
 			
@@ -206,6 +209,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					
 					request.setAttribute("msg", msg);
 					request.setAttribute("modelLogin", modelLogin);
+					request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
 				    RequestDispatcher redireciona = request.getRequestDispatcher("principal/usuario.jsp");
 				    redireciona.forward(request, response);
 	    
