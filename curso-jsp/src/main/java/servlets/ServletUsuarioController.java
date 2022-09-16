@@ -109,6 +109,15 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					}
 					
 					
+				}else if(acao !=null && !acao.isEmpty() && acao.equalsIgnoreCase("paginar")) {
+					
+					Integer offset = Integer.parseInt(request.getParameter("pagina"));
+					
+					List<ModelLogin> listModelLogin = daoUsuarioRepository.consultaUsuarioListPaginada(super.getUserLogado(request), offset);
+					request.setAttribute("modelLogins", listModelLogin);
+					request.setAttribute("totalPagina", daoUsuarioRepository.totalPagina(super.getUserLogado(request)));
+					request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+					
 				}
 				else {
 					List<ModelLogin> listModelLogin = daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
