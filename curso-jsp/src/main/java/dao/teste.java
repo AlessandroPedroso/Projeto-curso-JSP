@@ -20,7 +20,7 @@ public class teste {
 			
 		}
 		
-		System.out.println(pagina.intValue());
+		//System.out.println(pagina.intValue());
 		
 	}
 
