@@ -177,6 +177,65 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	public int consultaUsuarioListTotalPaginaPaginacao(String nome, Long userLogado) throws Exception{
+		
+		String sql = "SELECT count(1) as total FROM model_login where upper(nome) like upper(?) and useradmin is false and usuario_id = ?";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%" + nome + "%");
+		statement.setLong(2, userLogado);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		resultSet.next();
+		
+		Double cadastros = resultSet.getDouble("total");
+		
+		Double porpagina = 5.0;
+		
+		Double pagina = cadastros / porpagina;
+		
+		Double resto = pagina % 2; //resto da divisão
+		
+		//System.out.println("resto: " + resto);
+		
+		if(resto > 0) {
+			
+			pagina ++;
+			
+		}
+		
+		return pagina.intValue();
+	}
+	
+	public List<ModelLogin> consultaUsuarioListOffSet(String nome, Long userLogado, int offset) throws Exception{
+		
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+		
+		String sql = "SELECT * FROM model_login where upper(nome) like upper(?) and useradmin is false and usuario_id = ? offset "+offset+" limit 5";
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setString(1, "%" + nome + "%");
+		statement.setLong(2, userLogado);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setEmail(resultSet.getString("email"));
+			modelLogin.setId(resultSet.getLong("id"));
+			modelLogin.setLogin(resultSet.getString("login"));
+			modelLogin.setNome(resultSet.getString("nome"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
+			modelLogin.setSexo(resultSet.getString("sexo"));
+			//modelLogin.setSenha(resultSet.getString("senha"));
+			
+			retorno.add(modelLogin);
+		}
+		
+		
+		return retorno;
+		
+	}
+	
 	public List<ModelLogin> consultaUsuarioList(String nome, Long userLogado) throws Exception{
 		
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();

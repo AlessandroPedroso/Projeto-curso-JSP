@@ -69,6 +69,24 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					ObjectMapper objectMapper = new ObjectMapper();
 					String json = objectMapper.writeValueAsString(dadosJsonUser);
 					
+					response.addHeader("totalPagina", ""+daoUsuarioRepository.consultaUsuarioListTotalPaginaPaginacao(nomeBusca, super.getUserLogado(request))); // retorna por fora da lista, por cabeçalho
+					response.getWriter().write(json);
+					
+					//response.getWriter().write("Excluído com sucesso!");
+			
+				}else if(acao !=null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarUserAjaxPage")) {
+					
+					String nomeBusca = request.getParameter("nomeBusca");
+					String paginaOffset = request.getParameter("pagina");
+					//System.out.println(nomeBusca);
+					
+					List<ModelLogin> dadosJsonUser = daoUsuarioRepository.consultaUsuarioListOffSet(nomeBusca,super.getUserLogado(request), Integer.parseInt(paginaOffset));
+					
+					
+					ObjectMapper objectMapper = new ObjectMapper();
+					String json = objectMapper.writeValueAsString(dadosJsonUser);
+					
+					response.addHeader("totalPagina", ""+daoUsuarioRepository.consultaUsuarioListTotalPaginaPaginacao(nomeBusca, super.getUserLogado(request))); // retorna por fora da lista, por cabeçalho
 					response.getWriter().write(json);
 					
 					//response.getWriter().write("Excluído com sucesso!");
