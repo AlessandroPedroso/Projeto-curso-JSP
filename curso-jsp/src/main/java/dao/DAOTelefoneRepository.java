@@ -20,6 +20,7 @@ public class DAOTelefoneRepository {
 		
 	}
 	
+	/*SELECT (consulta)*/
 	public List<ModelTelefone> listFone (Long idUserPai) throws Exception{
 		
 		List<ModelTelefone> listTelefone = new ArrayList<ModelTelefone>();
