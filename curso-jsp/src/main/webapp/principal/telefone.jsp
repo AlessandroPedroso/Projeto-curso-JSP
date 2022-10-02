@@ -57,7 +57,7 @@
 
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="numero"
-																	id="numero" class="form-control" required="required"> <span
+																	id="numero" class="form-control" maxlength="17" required="required"> <span
 																	class="form-bar"></span> <label class="float-label">Numero:</label>
 															</div>
 															
@@ -105,6 +105,14 @@
     
     
   <jsp:include page="javascriptfile.jsp"></jsp:include>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
+<script type="text/javascript">
+$(document).ready(function () { 
+    var $numero = $("#numero");
+    $numero.mask('(00) - 00000-0000', {reverse: false});
+});
+
+</script>
 </body>
 
 </html>

@@ -331,6 +331,13 @@
   
   <script type="text/javascript">
   
+  //aceita somente numero
+  $("#numero").keypress(function (event){
+	  
+	  return /\d/.test(String.fromCharCode(event.keyCode));
+  });
+  
+ 
   function pesquisaCep(){
 	  
 	  var cep = $("#cep").val();
