@@ -36,7 +36,7 @@
 
 										<div class="row">
 										<div class="col-sm-12">
-											<!-- Cadastro de usuário -->
+											<!-- Cadastro de usuár	io -->
 											<div class="card">
 												<div class="card-header">
 													<h3>Cadastro de usuário</h3>
@@ -253,8 +253,7 @@
 															}
 														
 														%>
-													
-														
+
 													</ul>
 												</nav>
 

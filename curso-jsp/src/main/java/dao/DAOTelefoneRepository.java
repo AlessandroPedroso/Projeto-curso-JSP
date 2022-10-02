@@ -26,8 +26,9 @@ public class DAOTelefoneRepository {
 		List<ModelTelefone> listTelefone = new ArrayList<ModelTelefone>();
 		
 		String sql = "select * from telefone where usuario_pai_id = ?";
-		PreparedStatement statement = connection.prepareStatement(sql);
 		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setLong(1, idUserPai);
 		ResultSet resultSet = statement.executeQuery();
 		
 		while(resultSet.next()) {
