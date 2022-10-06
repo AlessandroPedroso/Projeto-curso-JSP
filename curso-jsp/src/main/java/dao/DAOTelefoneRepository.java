@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,23 @@ public class DAOTelefoneRepository {
 		statement.setLong(1, id);
 		statement.executeUpdate();
 		connection.commit();
+	}
+	
+	/*VERIFICA SE É DUPLICADO O TELEFONE*/
+	public boolean existeFone(String fone, Long idUse) throws Exception {
+		
+			String sql = "select count(1) > 0 as existe from telefone where usuario_pai_id = ? and numero = ?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			
+			statement.setLong(1, idUse);
+			statement.setString(2, fone);
+			
+			ResultSet resultSet = statement.executeQuery();
+			
+			resultSet.next();
+			
+			return resultSet.getBoolean("existe");
+	
 	}
 
 }
