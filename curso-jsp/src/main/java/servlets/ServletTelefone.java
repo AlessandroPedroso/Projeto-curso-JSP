@@ -98,8 +98,8 @@ public class ServletTelefone extends ServletGenericUtil {
 						
 						daoTelefoneRepository.gravaTelefone(modelTelefone);
 						
-						
 						request.setAttribute("msg", "Salvo com sucesso");
+						
 						
 				}else {
 					request.setAttribute("msg", "Telefone ja existe");
