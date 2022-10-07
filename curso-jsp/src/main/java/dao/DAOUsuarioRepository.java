@@ -155,6 +155,32 @@ public class DAOUsuarioRepository {
 		
 	}
 	
+	public List<ModelLogin> consultaUsuarioListRel(Long userLogado) throws Exception{
+		
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+		
+		String sql = "SELECT * FROM model_login where useradmin is false and usuario_id = " + userLogado;
+		PreparedStatement statement = connection.prepareStatement(sql);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setEmail(resultSet.getString("email"));
+			modelLogin.setId(resultSet.getLong("id"));
+			modelLogin.setLogin(resultSet.getString("login"));
+			modelLogin.setNome(resultSet.getString("nome"));
+			modelLogin.setPerfil(resultSet.getString("perfil"));
+			modelLogin.setSexo(resultSet.getString("sexo"));
+			//modelLogin.setSenha(resultSet.getString("senha"));
+			
+			retorno.add(modelLogin);
+		}
+		
+		return retorno;
+		
+	}
+	
 	public List<ModelLogin> consultaUsuarioList(Long userLogado) throws Exception{
 		
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
