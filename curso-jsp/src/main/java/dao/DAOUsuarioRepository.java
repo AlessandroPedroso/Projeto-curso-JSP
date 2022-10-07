@@ -9,10 +9,12 @@ import java.util.List;
 
 import connection.SingleConnectionBanco;
 import model.ModelLogin;
+import model.ModelTelefone;
 
 public class DAOUsuarioRepository {
 	
-	private Connection connection; 
+	private Connection connection;
+	
 	
 	public DAOUsuarioRepository() {
 		
@@ -174,11 +176,39 @@ public class DAOUsuarioRepository {
 			modelLogin.setSexo(resultSet.getString("sexo"));
 			//modelLogin.setSenha(resultSet.getString("senha"));
 			
+			modelLogin.setTelefones(this.listFone(modelLogin.getId()));
+			
 			retorno.add(modelLogin);
 		}
 		
 		return retorno;
 		
+	}
+	
+	/*SELECT (consulta)*/
+	public List<ModelTelefone> listFone (Long idUserPai) throws Exception{
+		
+		List<ModelTelefone> listTelefone = new ArrayList<ModelTelefone>();
+		
+		String sql = "select * from telefone where usuario_pai_id = ?";
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setLong(1, idUserPai);
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			ModelTelefone modelTelefone = new ModelTelefone();
+			
+			modelTelefone.setId(resultSet.getLong("id"));
+			modelTelefone.setNumero(resultSet.getString("numero"));
+			modelTelefone.setUsuario_pai_id(this.consultaUsuarioID(resultSet.getLong("usuario_pai_id")));
+			modelTelefone.setUsuario_cad_id(this.consultaUsuarioID(resultSet.getLong("usuario_cad_id")));
+			
+			listTelefone.add(modelTelefone);
+		}
+		
+		return listTelefone;
 	}
 	
 	public List<ModelLogin> consultaUsuarioList(Long userLogado) throws Exception{

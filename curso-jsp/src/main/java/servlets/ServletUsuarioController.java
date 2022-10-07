@@ -153,7 +153,6 @@ public class ServletUsuarioController extends ServletGenericUtil {
 						
 					}
 					
-					
 					request.setAttribute("dataInicial", dataInicial);
 					request.setAttribute("dataFinal", dataFinal);
 					request.getRequestDispatcher("principal/reluser.jsp").forward(request, response);
