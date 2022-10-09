@@ -29,7 +29,7 @@ public class DAOUsuarioRepository {
 		if(objeto.isNovo()) {/*Grava um novo*/
 			
 		
-			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero, datanascimento, rendamensal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
+			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero, datanascimento, rendamensal) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 	
 			PreparedStatement insert = connection.prepareStatement(sql);
 			insert.setString(1, objeto.getLogin());
@@ -176,6 +176,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setNome(resultSet.getString("nome"));
 			modelLogin.setPerfil(resultSet.getString("perfil"));
 			modelLogin.setSexo(resultSet.getString("sexo"));
+			modelLogin.setDataNascimento(resultSet.getDate("datanascimento"));
 			//modelLogin.setSenha(resultSet.getString("senha"));
 			
 			modelLogin.setTelefones(this.listFone(modelLogin.getId()));
@@ -206,6 +207,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setNome(resultSet.getString("nome"));
 			modelLogin.setPerfil(resultSet.getString("perfil"));
 			modelLogin.setSexo(resultSet.getString("sexo"));
+			modelLogin.setDataNascimento(resultSet.getDate("datanascimento"));
 			//modelLogin.setSenha(resultSet.getString("senha"));
 			
 			modelLogin.setTelefones(this.listFone(modelLogin.getId()));
