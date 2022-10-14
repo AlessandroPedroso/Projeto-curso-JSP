@@ -360,9 +360,12 @@
  
  var dataNascimento = $("#dataNascimento").val();
  
- var dateFormat = new Date(dataNascimento);
- 
- $("#dataNascimento").val(dateFormat.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+ if(dataNascimento !=null && dataNascimento!=''){
+	 
+	 var dateFormat = new Date(dataNascimento);
+	 
+	 $("#dataNascimento").val(dateFormat.toLocaleDateString('pt-BR', {timeZone: 'UTC'}));
+ }
  
  $("#nome").focus();
   

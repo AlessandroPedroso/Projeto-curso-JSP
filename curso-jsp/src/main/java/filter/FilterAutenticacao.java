@@ -18,9 +18,6 @@ import java.sql.SQLException;
 
 import connection.SingleConnectionBanco;
 
-/**
- * Servlet Filter implementation class FilterAutenticacao
- */
 
 @WebFilter(urlPatterns = {"/principal/*"})/*Interceptas todas as requisições que vierem do projeto ou mapeamento*/
 public class FilterAutenticacao extends HttpFilter implements Filter{
