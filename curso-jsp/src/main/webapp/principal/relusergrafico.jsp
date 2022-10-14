@@ -93,29 +93,43 @@
   
 
 function gerarGrafico(){
+	
+	
+		var urlAction = document.getElementById('formUser').action;
+		var dataInicial = document.getElementById('dataInicial').value;
+		var dataFinal = document.getElementById('dataFinal').value;
+		
+	  $.ajax({
+		  
+		  method:"get", //manda ação para a servlet
+		  url: urlAction, //pega ação do form para saber qual servlet mandar
+		  data: "dataInicial=" + dataInicial + '&dataFinal' + dataFinal +  '&acao=graficoSalario',
+		  success: function (response){
+			  var json = JSON.parse(response);
+			  
+			  const myChart = new Chart(document.getElementById('myChart'),
+						{
+						    type: 'line',
+						    data: {
+							    	labels:  json.perfils,
+							    	datasets: [{
+							      	label: 'Gráfico de média salarial por tipo',
+							      	backgroundColor: 'rgb(255, 99, 132)',
+							      	borderColor: 'rgb(255, 99, 132)',
+							      	data: json.salarios,
+							    }]
+							  },
+						    options: {}
+						}
+					);
+			  //alert(response); //pega o response write da servlet
+		  }
+		  
+	  }).fail(function(xhr, status, errorThrown){
+		 alert('Erro ao deletar usuário por id: ' + xhr.responseText); 
+	  });
 
-const myChart = new Chart(document.getElementById('myChart'),
-		{
-		    type: 'line',
-		    data: {
-			    	labels:  [
-			    	    'January',
-			    	    'February',
-			    	    'March',
-			    	    'April',
-			    	    'May',
-			    	    'June',
-			    	  ],
-			    	datasets: [{
-			      	label: 'Gráfico de média salarial por tipo',
-			      	backgroundColor: 'rgb(255, 99, 132)',
-			      	borderColor: 'rgb(255, 99, 132)',
-			      	data: [0, 10, 5, 2, 20, 30, 45],
-			    }]
-			  },
-		    options: {}
-		}
-	);
+
 
 }
 
