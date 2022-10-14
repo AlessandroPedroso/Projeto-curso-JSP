@@ -91,6 +91,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript">
   
+  var myChart = new Chart(document.getElementById('myChart'));
 
 function gerarGrafico(){
 	
@@ -103,11 +104,14 @@ function gerarGrafico(){
 		  
 		  method:"get", //manda ação para a servlet
 		  url: urlAction, //pega ação do form para saber qual servlet mandar
-		  data: "dataInicial=" + dataInicial + '&dataFinal' + dataFinal +  '&acao=graficoSalario',
+		  data: "dataInicial=" + dataInicial + '&dataFinal=' + dataFinal +  '&acao=graficoSalario',
 		  success: function (response){
-			  var json = JSON.parse(response);
 			  
-			  const myChart = new Chart(document.getElementById('myChart'),
+			  var json = JSON.parse(response);
+			  myChart.destroy();//limpa o grafico
+			  
+			  // e monta novamente
+			  myChart = new Chart(document.getElementById('myChart'),
 						{
 						    type: 'line',
 						    data: {
