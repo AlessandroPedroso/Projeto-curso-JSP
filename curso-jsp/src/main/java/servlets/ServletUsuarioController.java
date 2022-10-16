@@ -1,12 +1,11 @@
 package servlets;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import model.ModelLogin;
 import util.ReportUtil;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -294,7 +293,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					modelLogin.setDataNascimento(Date.valueOf(new SimpleDateFormat("yyyy-mm-dd").format(new SimpleDateFormat("dd/mm/yyyy").parse(dataNascimento))));
 					modelLogin.setRendamensal(Double.parseDouble(rendaMensal));
 					
-					if (ServletFileUpload.isMultipartContent(request)) {
+					if (request.getPart("filefoto") != null) {
 						
 						Part part = request.getPart("filefoto"); /*pega foto da tela*/
 						if (part.getSize() > 0) {
